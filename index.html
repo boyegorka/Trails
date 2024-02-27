@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/custom.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-xxl">
+            <a class="navbar-brand" href="#">
+                <img src="/Resources/Logo1.png" alt="Logo" width="50" height="50">
+                Тропы
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+                <span class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-circle-user fa-2xl"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-xxl">
+        <!-- Алерт -->
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Информация о компании -->
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-sm-6 col-lg-4 px-2 py-2">
+                    <div class="ratio ratio-4x3">
+                        <img class="object-fit-cover rounded" src="/Resources/DescriptionImage1.png" alt="DescriptionImage">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 px-2 py-2">
+                    <p class="text-center">
+                        <strong>Тропы</strong> - компания, которая помогает людям найти свой идеальный маршрут для пешеходного туризма по Москве. Мы предлагаем широкий выбор маршрутов, как для начинающих, так и для опытных туристов.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Преимущества компании -->
+        <div class="container-fluid text-center py-5">
+            <div class="row">
+                <div class="col">
+                    <p class="fs-4 fw-bold">Наши преимущества</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center align-items-stretch">
+                <div class="col-4 col-sm-3 col-lg-2 px-2 py-2">
+                    <div class="card h-100">
+                        <div class="ratio ratio-1x1">
+                            <img class="card-img-top" src="/Resources/Advantage1.png" alt="DescriptionImage">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Гиды с большим опытом</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 col-sm-3 col-lg-2 px-2 py-2">
+                    <div class="card h-100">
+                        <div class="ratio ratio-1x1">
+                            <img class="card-img-top" src="/Resources/Advantage2.png" alt="DescriptionImage">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Незабываемые впечатления</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 col-sm-3 col-lg-2 px-2 py-2">
+                    <div class="card h-100">
+                        <div class="ratio ratio-1x1">
+                            <img class="card-img-top" src="/Resources/Advantage3.png" alt="DescriptionImage">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Самые разнообразные маршруты</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Список пешеходных маршрутов -->
+        <div class="container-fluid py-5">
+            <div class="row my-1">
+                <div class="col">
+                    <p class="fs-4 fw-bold">Список пешеходных маршрутов</p>
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-12 col-lg-4 my-1">
+                    <input id="routes-search" class="form-control form-control-sm" type="text" placeholder="Введите название">
+                </div>
+                <div class="col-12 col-lg-4 my-1">
+                    <select id="routes-select" class="form-select form-select-sm">
+                        <option selected>Не выбрано</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col table-responsive">
+                    <table id="routes-table" class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Название</th>
+                                <th scope="col">Описание</th>
+                                <th scope="col">Основные объекты</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row my-1">
+                <div class="col">
+                    <nav aria-label="Page navigation">
+                        <ul id="routes-pagination" class="pagination justify-content-center">
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Доступные гиды по маршруту -->
+        <div class="container-fluid py-5 d-none" id="guides-div">
+            <div class="row my-1">
+                <div class="col">
+                    <p id="guides-div-title" class="fs-4 fw-bold">Доступные гиды по маршруту: *Название*</p>
+                </div>
+            </div>
+            <div class="row my-1 justify-content-between">
+                <div class="col-12 col-md-4 my-1">
+                    <select class="form-select form-select-sm" id="guide-language-select" aria-label="Small select example">
+                        <option selected>Не выбрано</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="row">
+                        <label class="col-auto col-form-label">Опыт работы</label>
+                        <div class="col">
+                            <input type="text" class="form-control form-control-sm" id="work-experience-from" placeholder="От">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control form-control-sm" id="work-experience-to" placeholder="До">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-1">
+                <div class="col table-responsive">
+                    <table class="table" id="guides-table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">ФИО</th>
+                                <th scope="col">Языки</th>
+                                <th scope="col">Опыт работы</th>
+                                <th scope="col">Стоимость услуг в час</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col">
+                    <nav aria-label="Page navigation">
+                        <ul id="guides-pagination" class="pagination justify-content-center">
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid text-center">
+            ©2023
+        </div>
+    </div>    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/af0df6cd30.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+
