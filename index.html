@@ -204,7 +204,94 @@
         <div class="container-fluid text-center">
             ©2023
         </div>
-    </div>    
+    </div>
+
+    <!-- Оформление заявки -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalLabel">Оформление заявки</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+
+                        <div class="row py-1">
+                            <label for="guide-name" class="col-auto col-form-label py-0">Гид:</label>
+                            <div class="col-auto px-0">
+                                <input type="text" readonly class="form-control-plaintext py-0 fw-bold" id="guide-name" value="Афанасьева Полина">
+                            </div>
+                        </div>
+
+                        <div class="row py-1">
+                            <label for="route-name" class="col-auto col-form-label py-0">Название маршрута:</label>
+                            <div class="col-auto px-0">
+                                <input type="text" readonly class="form-control-plaintext py-0 fw-bold" id="route-name" value="Воробьёвы горы">
+                            </div>
+                        </div>
+
+                        <div class="row my-2 row-cols-1 row-cols-sm-2 gy-2 gx-4">
+                            <div class="col">
+                                <label for="tour-date">Дата экскурсии</label>
+                                <input id="tour-date" class="form-control form-control-sm" type="date" />
+                            </div>
+                            
+                            <div class="col">
+                                <label for="tour-time">Время начала</label>
+                                <input id="tour-time" class="form-control form-control-sm" type="time" step="300"/>
+                            </div>
+
+                            <div class="col">
+                                <label for="tour-duration">Длительность экскурсии</label>
+                                <select class="form-select form-select-sm" id="tour-duration">
+                                    <option selected value="1">1 час</option>
+                                    <option value="2">2 часа</option>
+                                    <option value="3">3 часа</option>
+                                </select>
+                            </div>
+
+                            <div class="col">
+                                <label for="people-count">Количество человек</label>
+                                <input id="people-count" class="form-control form-control-sm" type="number" min="0" max="20"/>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row mt-4">
+                            <p class="fs-5 my-0">Дополнительные опции</p>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-auto my-1">
+                                <input class="form-check-input" type="checkbox" value="" id="scolar-discount">
+                                <label class="form-check-label" for="scolar-discount">Скидка для школьников и студентов</label>
+                                <p class="fw-light fst-italic my-0">Стоимость снизится на 15%</p>
+                            </div>
+
+                            <div class="col-auto my-1">
+                                <input class="form-check-input" type="checkbox" value="" id="themed-souvenirs">
+                                <label class="form-check-label" for="themed-souvenirs">Тематические сувениры</label>
+                                <p class="fw-light fst-italic my-0">Стоимость билета увеличится на 500 рублей</p>
+                            </div>
+                        </div>
+
+                        <div class="row my-1">
+                            <label for="tour-price" class="col-auto col-form-label py-0 fs-5">Итоговая стоимость:</label>
+                            <div class="col-auto">
+                                <input type="text" readonly class="form-control-plaintext fs-4 fw-bold py-0" id="tour-price" value="43242₽">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/af0df6cd30.js" crossorigin="anonymous"></script>

@@ -32,6 +32,8 @@ var guides = [];
 var filteredGuides = [];
 var languages = [];
 
+// Application registration
+const myModal = new bootstrap.Modal(document.getElementById('myModal'), {keyboard:false})
 
 // RoutesTable funcs
 function loadRoutes() {
@@ -288,6 +290,10 @@ function setLanguagesToGuidesSelect() {
         newOption.text = language;
         guidesTableLanguageSelect.add(newOption);
     }
+}
+
+function registerApplication() {
+    myModal.show()
 }
 
 window.onload = function() {
