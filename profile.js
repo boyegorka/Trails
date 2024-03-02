@@ -83,6 +83,26 @@ function paginationOrdersTable() {
     ordersTablePaginationElement.appendChild(nextPage);
 }
 
+function showAlert(message, type) {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
+            `${message}`,
+            `<button id="alert-close-button" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`,
+        `</div>`
+    ].join('')
+
+    alertPlaceholder.append(wrapper)
+
+    const closeButton = document.getElementById("alert-close-button")
+    
+    setTimeout(() => {
+        if (closeButton) {
+            closeButton.click()
+        }
+    }   , 5000);
+}
+
 
 window.onload = function() {
     loadOrders();
