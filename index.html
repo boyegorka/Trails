@@ -4,47 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/custom.min.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Trails</title>
 </head>
 <body>
 
     <!-- Навигация -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-xxl">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.html">
                 <img src="/Resources/Logo1.png" alt="Logo" width="50" height="50">
                 Тропы
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                </ul>
-                <span class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-circle-user fa-2xl"></i>
-                    </a>
-                </span>
-            </div>
+            <span class="nav-item">
+                <a class="nav-link" href="profile.html">
+                    <i class="fa-solid fa-circle-user fa-2xl"></i>
+                </a>
+            </span>
         </div>
     </nav>
 
     <div class="container-xxl">
         <!-- Алерт -->
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        <div id="alertPlaceholder"></div>
 
         <!-- Информация о компании -->
-        <div class="container-fluid">
+        <div class="container-fluid my-5">
             <div class="row align-items-center justify-content-center">
                 <div class="col-sm-6 col-lg-4 px-2 py-2">
                     <div class="ratio ratio-4x3">
@@ -60,7 +44,7 @@
         </div>
 
         <!-- Преимущества компании -->
-        <div class="container-fluid text-center py-5">
+        <div class="container-fluid text-center my-5">
             <div class="row">
                 <div class="col">
                     <p class="fs-4 fw-bold">Наши преимущества</p>
@@ -68,7 +52,7 @@
             </div>
 
             <div class="row justify-content-center align-items-stretch">
-                <div class="col-4 col-sm-3 col-lg-2 px-2 py-2">
+                <div class="col-4 col-sm-3 col-lg-3 px-2 py-3">
                     <div class="card h-100">
                         <div class="ratio ratio-1x1">
                             <img class="card-img-top" src="/Resources/Advantage1.png" alt="DescriptionImage">
@@ -79,7 +63,7 @@
                     </div>
                 </div>
 
-                <div class="col-4 col-sm-3 col-lg-2 px-2 py-2">
+                <div class="col-4 col-sm-3 col-lg-3 px-2 py-3">
                     <div class="card h-100">
                         <div class="ratio ratio-1x1">
                             <img class="card-img-top" src="/Resources/Advantage2.png" alt="DescriptionImage">
@@ -90,7 +74,7 @@
                     </div>
                 </div>
 
-                <div class="col-4 col-sm-3 col-lg-2 px-2 py-2">
+                <div class="col-4 col-sm-3 col-lg-3 px-2 py-3">
                     <div class="card h-100">
                         <div class="ratio ratio-1x1">
                             <img class="card-img-top" src="/Resources/Advantage3.png" alt="DescriptionImage">
@@ -104,7 +88,7 @@
         </div>
 
         <!-- Список пешеходных маршрутов -->
-        <div class="container-fluid py-5">
+        <div class="container-fluid my-5">
             <div class="row my-1">
                 <div class="col">
                     <p class="fs-4 fw-bold">Список пешеходных маршрутов</p>
@@ -172,7 +156,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row my-1">
                 <div class="col table-responsive">
                     <table class="table" id="guides-table">
@@ -207,88 +190,90 @@
     </div>
 
     <!-- Оформление заявки -->
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalLabel">Оформление заявки</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-
-                        <div class="row py-1">
-                            <label for="guide-name" class="col-auto col-form-label py-0">Гид:</label>
-                            <div class="col-auto px-0">
-                                <input type="text" readonly class="form-control-plaintext py-0 fw-bold" id="guide-name" value="Афанасьева Полина">
-                            </div>
-                        </div>
-
-                        <div class="row py-1">
-                            <label for="route-name" class="col-auto col-form-label py-0">Название маршрута:</label>
-                            <div class="col-auto px-0">
-                                <input type="text" readonly class="form-control-plaintext py-0 fw-bold" id="route-name" value="Воробьёвы горы">
-                            </div>
-                        </div>
-
-                        <div class="row my-2 row-cols-1 row-cols-sm-2 gy-2 gx-4">
-                            <div class="col">
-                                <label for="tour-date">Дата экскурсии</label>
-                                <input id="tour-date" class="form-control form-control-sm" type="date" />
-                            </div>
-                            
-                            <div class="col">
-                                <label for="tour-time">Время начала</label>
-                                <input id="tour-time" class="form-control form-control-sm" type="time" step="300"/>
-                            </div>
-
-                            <div class="col">
-                                <label for="tour-duration">Длительность экскурсии</label>
-                                <select class="form-select form-select-sm" id="tour-duration">
-                                    <option selected value="1">1 час</option>
-                                    <option value="2">2 часа</option>
-                                    <option value="3">3 часа</option>
-                                </select>
-                            </div>
-
-                            <div class="col">
-                                <label for="people-count">Количество человек</label>
-                                <input id="people-count" class="form-control form-control-sm" type="number" min="0" max="20"/>
-                            </div>
-                            
-                        </div>
-
-                        <div class="row mt-4">
-                            <p class="fs-5 my-0">Дополнительные опции</p>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col-auto my-1">
-                                <input class="form-check-input" type="checkbox" value="" id="scolar-discount">
-                                <label class="form-check-label" for="scolar-discount">Скидка для школьников и студентов</label>
-                                <p class="fw-light fst-italic my-0">Стоимость снизится на 15%</p>
-                            </div>
-
-                            <div class="col-auto my-1">
-                                <input class="form-check-input" type="checkbox" value="" id="themed-souvenirs">
-                                <label class="form-check-label" for="themed-souvenirs">Тематические сувениры</label>
-                                <p class="fw-light fst-italic my-0">Стоимость билета увеличится на 500 рублей</p>
-                            </div>
-                        </div>
-
-                        <div class="row my-1">
-                            <label for="tour-price" class="col-auto col-form-label py-0 fs-5">Итоговая стоимость:</label>
-                            <div class="col-auto">
-                                <input type="text" readonly class="form-control-plaintext fs-4 fw-bold py-0" id="tour-price" value="43242₽">
-                            </div>
-                        </div>
-
+                <form id="order-form">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalLabel">Оформление заявки</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
-                </div>
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <div class="row py-1">
+                                <label for="guide-name" class="col-auto col-form-label py-0">Гид:</label>
+                                <div class="col-auto px-0">
+                                    <input type="text" readonly class="form-control-plaintext py-0 fw-bold" id="guide-name">
+                                </div>
+                            </div>
+
+                            <div class="row py-1">
+                                <label for="route-name" class="col-auto col-form-label py-0">Название маршрута:</label>
+                                <div class="col-auto px-0">
+                                    <input type="text" readonly class="form-control-plaintext py-0 fw-bold" id="route-name">
+                                </div>
+                            </div>
+
+                            <div class="row my-2 row-cols-1 row-cols-sm-2 gy-2 gx-4">
+                                <div class="col">
+                                    <label for="tour-date">Дата экскурсии</label>
+                                    <input id="tour-date" class="form-control form-control-sm" type="date" required/>
+                                </div>
+                                
+                                <div class="col">
+                                    <label for="tour-time">Время начала</label>
+                                    <input id="tour-time" class="form-control form-control-sm" type="time" step="300" required/>
+                                </div>
+
+                                <div class="col">
+                                    <label for="tour-duration">Длительность экскурсии</label>
+                                    <select class="form-select form-select-sm" id="tour-duration" required>
+                                        <option selected value="1">1 час</option>
+                                        <option value="2">2 часа</option>
+                                        <option value="3">3 часа</option>
+                                    </select>
+                                </div>
+
+                                <div class="col">
+                                    <label for="people-count">Количество человек</label>
+                                    <input id="people-count" class="form-control form-control-sm" type="number" min="0" max="20" value="1" required/>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row mt-4">
+                                <p class="fs-5 my-0">Дополнительные опции</p>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-auto my-1">
+                                    <input class="form-check-input" type="checkbox" id="scolar-discount">
+                                    <label class="form-check-label" for="scolar-discount">Скидка для школьников и студентов</label>
+                                    <p class="fw-light fst-italic my-0">Стоимость снизится на 15%</p>
+                                </div>
+
+                                <div class="col-auto my-1">
+                                    <input class="form-check-input" type="checkbox" id="themed-souvenirs">
+                                    <label class="form-check-label" for="themed-souvenirs">Тематические сувениры</label>
+                                    <p class="fw-light fst-italic my-0">Стоимость билета увеличится на 500 рублей</p>
+                                </div>
+                            </div>
+
+                            <div class="row my-1">
+                                <label for="tour-price" class="col-auto col-form-label py-0 fs-5">Итоговая стоимость:</label>
+                                <div class="col-auto">
+                                    <input type="text" readonly class="form-control-plaintext fs-4 fw-bold py-0" id="tour-price">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
