@@ -65,35 +65,21 @@ function loadOrders() {
     xhr.send();
 
     xhr.onload = function () {
-        let response = xhr.response;
-        orders = response
-        updateOrdersTable()
+        if (xhr.status === 200) {
+            let response = xhr.response;
+            orders = response
+            updateOrdersTable()
+        } else {
+            showAlert("Заказы не получены", alertType.danger)
+            reject(new Error(`Failed to load route. Status: ${xhr.status}`));
+        }
     };
 
     xhr.onerror = function() {
-        console.log('Ошибка');
+        showAlert("Заказы не получены", alertType.danger)
+        console.log(`${xhr.status}`);
     };
 }
-
-// async function loadRoute(routeId) {
-//     const link = mainLink + apiRoutes.routes + `/${routeId}` + apiKey
-
-//     let xhr = new XMLHttpRequest();
-//     xhr.responseType = "json";
-//     xhr.open('GET', link);
-//     xhr.send();
-
-//     xhr.onload = function () {
-//         modalRoute = xhr.response
-
-//         console.log(modalRoute)
-//         return modalRoute
-//     };
-
-//     xhr.onerror = function() {
-//         console.log('Ошибка');
-//     };
-// }
 
 function loadRoute(routeId) {
     return new Promise((resolve, reject) => {
@@ -123,17 +109,17 @@ function updateOrdersTable() {
     const startIndex = (currentPageOrdersTable - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const displayedData = orders.slice(startIndex, endIndex);
-    var itemCount = 0
+    var itemCount = startIndex + 1
     clearOrdersTable()
 
     displayedData.forEach(item => {
         loadRoute(item["route_id"])
         .then((route) => {
-            itemCount += 1
-            // console.log(route)
+            console.log(`${item["id"]},${item["route_id"]},${item["guide_id"]}`)
             const row = document.createElement('tr');
             row.innerHTML = `<td class="text-center">${itemCount}</td><td class="text-center">${route["name"]}</td><td class="text-center">${item["date"]}</td><td class="text-center">${item["price"]}₽</td><td class="text-center"><div class="d-flex text-center"><button class="btn btn-link" onclick="orderForView(${item["id"]},${item["route_id"]},${item["guide_id"]})"><i class="fa-solid fa-eye fa-xl"></i></button><button class="btn btn-link" onclick="orderForEdit(${item["id"]},${item["route_id"]},${item["guide_id"]})"><i class="fa-solid fa-pen fa-xl"></i></button><button class="btn btn-link" onclick="showDeletionModal(${item["id"]})"><i class="fa-solid fa-trash fa-xl"></i></button></div></td>`;
             ordersTableTBody.appendChild(row);
+            itemCount ++
         })
     });
 
@@ -170,6 +156,12 @@ function paginationOrdersTable() {
     ordersTablePaginationElement.appendChild(nextPage);
 }
 
+function changeOrdersTablePage(page) {
+    currentPageOrdersTable = Math.max(1, Math.min(page, Math.ceil(orders.length / itemsPerPage)));
+    updateOrdersTable();
+    paginationOrdersTable();
+}
+
 // Modal funcs
 function loadRouteForModal(routeId) {
     const link = mainLink + apiRoutes.routes + `/${routeId}` + apiKey
@@ -180,13 +172,19 @@ function loadRouteForModal(routeId) {
     xhr.send();
 
     xhr.onload = function () {
-        modalRoute = xhr.response;
-        console.log(modalRoute["name"])
-        setModalRoute()
+        if (xhr.status === 200) {
+            modalRoute = xhr.response;
+            console.log(modalRoute["name"])
+            setModalRoute()
+        } else {
+            showAlert("Маршрут не получен", alertType.danger)
+            reject(new Error(`Failed to load route. Status: ${xhr.status}`));
+        }
     };
 
     xhr.onerror = function() {
-        console.log('Ошибка');
+        showAlert("Маршрут не получен", alertType.danger)
+        console.log(`${xhr.status}`);
     };
 }
 
@@ -199,12 +197,16 @@ function loadGuideForModal(guideId) {
     xhr.send();
 
     xhr.onload = function () {
-        modalGuide = xhr.response;
-        // console.log(modalGuide)
-        setModalGuide()
+        if (xhr.status === 200) {
+            modalGuide = xhr.response;
+            setModalGuide()
+        } else {
+            showAlert("Гид не получен", alertType.danger)
+            reject(new Error(`Failed to load route. Status: ${xhr.status}`));
+        }
     };
-
     xhr.onerror = function() {
+        showAlert("Гид не получен", alertType.danger)
         console.log('Ошибка');
     };
 }
@@ -218,12 +220,18 @@ function loadOrderForModal(orderId) {
     xhr.send();
 
     xhr.onload = function () {
-        modalOrder = xhr.response;
-        console.log(modalOrder)
-        setModalOrder()
+        if (xhr.status === 200) {
+            modalOrder = xhr.response;
+            console.log(modalOrder)
+            setModalOrder()
+        } else {
+            showAlert("Заказ не получен", alertType.danger)
+            reject(new Error(`Failed to load route. Status: ${xhr.status}`));
+        }
     };
 
     xhr.onerror = function() {
+        showAlert("Заказ не получен", alertType.danger)
         console.log('Ошибка');
     };
 }
@@ -308,16 +316,22 @@ function deleteOrder(orderId) {
     let xhr = new XMLHttpRequest();
     xhr.responseType = "json";
     xhr.open('DELETE', link);
-    xhr.send();
+    xhr.send()
 
     xhr.onload = function () {
-        let response = xhr.response;
-        showAlert("Заявка успешно удалена", alertType.success)
-        console.log(response)
-        loadOrders()
+        console.log(xhr.status)
+        if (xhr.status === 200) {
+            let response = xhr.response
+            console.log(`Удалено `+ orderId)
+            loadOrders()
+            showAlert("Заявка успешно удалена", alertType.success)
+        } else {
+            showAlert("Заявка не удалена", alertType.danger)
+            reject(new Error(`Failed to load route. Status: ${xhr.status}`));
+        }
     };
-
     xhr.onerror = function() {
+        showAlert("Заявка не удалена", alertType.danger)
         console.log('Ошибка');
     };
 }
@@ -377,8 +391,15 @@ function putOrder(orderId, data) {
     xhr.send(formData);
 
     xhr.onload = function () {
-        const responseData = xhr.response;
-        console.log(responseData)
+        if (xhr.status === 200) {
+            const responseData = xhr.response;
+            console.log(responseData)
+            updateOrdersTable()
+            showAlert("Заявка успешно отредактирована", alertType.success)
+        } else {
+            showAlert("Заявка не отредактирована", alertType.danger)
+            reject(new Error(`Failed to load route. Status: ${xhr.status}`));
+        }
     };
 
     xhr.onerror = function() {
@@ -409,9 +430,10 @@ function setPrice() {
 }
 
 function showAlert(message, type) {
+    alertPlaceholder.innerHTML = ''
     const wrapper = document.createElement('div')
     wrapper.innerHTML = [
-        `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
+        `<div class="alert alert-${type} alert-dismissible fade show" role="alert" id="alert">`,
             `${message}`,
             `<button id="alert-close-button" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`,
         `</div>`
@@ -419,12 +441,11 @@ function showAlert(message, type) {
 
     alertPlaceholder.append(wrapper)
 
-    const closeButton = document.getElementById("alert-close-button")
+    const alertElement = document.getElementById('alert');
     
     setTimeout(() => {
-        if (closeButton) {
-            closeButton.click()
-        }
+        alertElement.classList.remove('show');
+        alertElement.classList.add('fade');
     }   , 5000);
 }
 

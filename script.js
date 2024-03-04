@@ -203,7 +203,6 @@ function loadGuidesForRoute(routeId) {
     xhr.onload = function () {
         let response = xhr.response;
         guides = response
-        // console.log(guides)
         getLanguages()
         filterGuides()
     };
@@ -468,17 +467,24 @@ function postGuide(data) {
 
 
     xhr.onload = function () {
-        const responseData = xhr.response;
-        console.log(responseData)
+        if (xhr.status === 200) {
+            const responseData = xhr.response;
+            showAlert("Заявка успешно отправлена", alertType.success)
+            console.log(responseData)
+        } else {
+            showAlert("Заявка не отправлена", alertType.danger)
+            reject(new Error(`Failed to load route. Status: ${xhr.status}`));
+        }
     };
-
     xhr.onerror = function() {
         console.error('Ошибка');
+        showAlert("Заявка не отправлена", alertType.danger)
     };
 }
 
 
 function showAlert(message, type) {
+    alertPlaceholder.innerHTML = ''
     const wrapper = document.createElement('div')
     wrapper.innerHTML = [
         `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
