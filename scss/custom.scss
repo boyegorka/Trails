@@ -1,19 +1,13 @@
-// $enable-grid-classes: false;
-// $enable-cssgrid: true;
+// 17. Желтый: синий, лиловый, светло-голубой, фиолетовый, серый, черный.
 
-// $utilities: (
-//     "width": (
-//         property: width,
-//         class: w,
-//         values: (
-//             5: 5%,
-//             25: 25%,
-//             50: 50%,
-//             75: 75%,
-//             100: 100%,
-//             auto: auto
-//         )
-//     ),
-// );
+$primary: rgb(105, 151, 221);
+$card-border-color: #e1de1b;
+$card-border-width: 2px;
+
+$pagination-color: #c8a2c8;
+$pagination-active-bg: #b37de3;
+$pagination-active-border-color: #b37de3;
+
+$table-color: #000152;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
