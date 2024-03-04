@@ -247,7 +247,7 @@ function updateGuidesTable() {
     displayedData.forEach(item => {
         const row = document.createElement('tr');
         const avatarPath = loadAvatars(item)
-        row.innerHTML = `<td class="w-5 h-25 align-middle"><img src="${avatarPath}" class="img-fluid rounded" style="max-width: 50px; height: auto; alt="Photo"></td><td class="align-middle">${item["name"]}</td><td class="align-middle">${item["language"]}</td><td class="align-middle">${item["workExperience"]}</td><td class="align-middle">${item["pricePerHour"]+"₽"}</td><td class="align-middle text-end"><button id="btn" type="button" class="btn btn-outline-primary" onclick=loadRouteInfo(${item["id"]},${item["route_id"]})>Оформить заявку</button></td>`;
+        row.innerHTML = `<td class="w-5 h-25 align-middle text-center"><img src="${avatarPath}" class="img-fluid rounded" style="max-width: 50px; height: auto; alt="Photo"></td><td class="align-middle text-center">${item["name"]}</td><td class="align-middle text-center">${item["language"]}</td><td class="align-middle text-center">${item["workExperience"]}</td><td class="align-middle text-center">${item["pricePerHour"]+"₽"}</td><td class="align-middle text-end"><button id="btn" type="button" class="btn btn-outline-primary" onclick=loadRouteInfo(${item["id"]},${item["route_id"]})>Оформить заявку</button></td>`;
         guidesTableTBody.appendChild(row);
     });
 
@@ -518,6 +518,7 @@ window.onload = function() {
     orderForm.addEventListener('submit', function(event) {
         event.preventDefault();
         processFormData();
+        
     });
 
     durationModalElement.addEventListener('change', setPrice)
