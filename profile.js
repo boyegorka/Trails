@@ -409,31 +409,41 @@ function processFormData(orderId) {
 function putOrder(orderId, data) {
     const link = mainLink + apiRoutes.orders + `/${orderId}` + apiKey;
 
-    let xhr = new XMLHttpRequest();
-    xhr.responseType = "json";
-    xhr.open('PUT', link);
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "json";
+        xhr.open('PUT', link);
 
-    const formData = new FormData();
-    for (const key in data) {
-        console.log(key, data[key]);
-        formData.append(key, data[key]);
-    }
-    xhr.send(formData);
-
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            const responseData = xhr.response;
-            console.log(responseData);
-            updateOrdersTable();
-            showAlert("Заявка успешно отредактирована", alertType.success);
-        } else {
-            showAlert("Заявка не отредактирована", alertType.danger);
+        const formData = new FormData();
+        for (const key in data) {
+            formData.append(key, data[key]);
         }
-    };
 
-    xhr.onerror = function() {
-        console.error('Ошибка');
-    };
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                resolve(xhr.response);
+            } else {
+                reject(new Error('Ошибка при выполнении запроса'));
+            }
+        };
+
+        xhr.onerror = function() {
+            reject(new Error('Ошибка'));
+        };
+
+        xhr.send(formData);
+    })
+        .then(resp => {
+            console.log(resp);
+            loadOrders();
+            showAlert("Заявка успешно отредактирована", alertType.success);
+            return resp;
+        })
+        .catch(error => {
+            console.error('Ошибка', error);
+            showAlert("Заявка не отредактирована", alertType.danger);
+            throw error;
+        });
 }
 
 function setPrice() {
